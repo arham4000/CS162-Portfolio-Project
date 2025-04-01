@@ -12,4 +12,26 @@ class, chess piece classes for all the different types of pieces, and a class fo
 I didn't see benefit in creating a separate class for the chess board. Implementing the board within the chess game class reduced 
 unnecessary code clutter created by having methods within each class to call each other. 
 
-I created a chess game class, a general parent chess piece class, and specific sub classes for each type of chess piece.
+I created a chess game class (ChessVar), a general parent chess piece class (Piece), and specific sub classes for each type of chess piece (Pawn, Rook, Knight, etc). 
+
+The ChessVar class initializes the chess board as a list of 8 lists, with each sublist having 
+8 members to represent an 8x8 chess board. Chess pieces are instances of their respective
+classes and are stored in the board as objects. I wrote a get_board method that goes
+through the chess board and returns a printable version, replacing chess piece objects with 
+their character tags, ex: 'K', 'p', 'q', etc, to make it easier to visualize the board while
+playing. 
+
+Implementing the board and placing the pieces was relatively simple, the harder part was
+implementing the piece movement rules. Pawns can move two spaces forward on their first move,
+rooks can move any number of spaces horizontally or vertically but cannot jump over pieces, 
+and so on. 
+
+The ChessVar make_move method validates the general movement rules for any attempted move, 
+such as a player cannot capture their own piece, a piece cannot move outside the board, etc.
+After validating general movement rules, the make_move method calls the validate_move method
+of the specific piece being moved. The validate_move method validates the piece specific 
+movement rules, ex: king can move one step in any direction, knight can move in a specific 
+pattern, etc. If the validate_move method returns True, the make_move method calls the
+move_piece method, which takes care of the specific of moving a piece object on the board.
+
+
